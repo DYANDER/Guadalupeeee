@@ -2,102 +2,129 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Para Ti Ingridd 💖</title>
+  <title>PARA TI, ZOE JULIA GUADALUPE</title>
   <style>
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+    :root{
+      --rojo: #ff3b30;
+      --azul: #0066cc; /* azul más fuerte */
+      --blanco: #ffffff;
+      --glauco: #2aa89e;
+      --margen-responsive: 16px;
     }
 
-    /* BODY con imagen + overlay */
     body {
-      background: url("3.jpeg") no-repeat center center fixed;
-      background-size: cover;
-      min-height: 100vh;
-      position: relative;
+      background: linear-gradient(to top, rgba(5,90,200,0.85) 0%, rgba(4,41,58,0.15) 100%);
+      margin: 0;
+      height: 100vh;
       overflow-x: hidden;
-      color: #fff;
-      line-height: 1.6;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.55); /* capa transparente oscura */
-      z-index: -1;
+      overflow-y: auto;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--blanco);
     }
 
-    /* HEADER romántico */
-    header {
-      background: rgba(255, 20, 147, 0.7); /* rosa chicle translúcido */
+    .boton-circular {
+      width: 100px;
+      height: 100px;
+      background-color: var(--rojo);
       color: white;
-      padding: 2rem 0;
-      text-align: center;
-      backdrop-filter: blur(4px);
-      border-bottom: 3px solid #ff69b4;
-    }
-    header h1 {
-      font-size: 2.5rem;
-    }
-
-    /* CONTENEDORES */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 2rem;
-      border-radius: 15px;
-      background: radial-gradient(circle, rgba(255,182,193,0.9) 0%, rgba(255,255,255,0.8) 100%);
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+      z-index: 10;
+      animation: latido 1s infinite;
     }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 1rem;
-      text-align: center;
-      color: #333;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.8rem;
-    }
-    .card h3 {
-      color: #e91e63;
-      margin-bottom: 0.5rem;
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
     }
 
-    /* ANIMACIÓN corazones y palabras */
+    .texto-encima-boton {
+      color: var(--blanco);
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      z-index: 11;
+    }
+
+    #contenedor {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: aparecer 2s ease forwards;
+      background-color: rgba(255,255,255,0.9); /* contenedor blanco ligeramente transparente */
+      border: 3px solid white;
+      border-radius: 20px;
+      padding: 20px;
+      color: black;
+      position: relative;
+      z-index: 999;
+      width: min(720px, calc(100% - (var(--margen-responsive) * 2)));
+      min-width: 0;
+      max-width: calc(100% - (var(--margen-responsive) * 2));
+      box-sizing: border-box;
+      margin: var(--margen-responsive) auto;
+    }
+
+    @keyframes aparecer {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #titulo {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .title-line{ text-align:center; line-height:1; }
+    .title-line.t1{ font-size:2.2em; color: #c2185b; font-weight:700; }
+    .title-line.t2{ font-size:1.6em; color: #c2185b; font-weight:600; }
+    .title-line.t3{ font-size:1.2em; color: #c2185b; font-weight:600; }
+
+    #imagen {
+      width: 350px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    #frase {
+      margin-top: 12px;
+      font-size: 1.15em;
+      text-align: center;
+      white-space: normal;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    #nombre {
+      margin-top: 10px;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #c2185b;
+    }
+
     .palabra-lluvia {
       position: absolute;
       top: -50px;
       left: 50%;
       transform: translateX(-50%);
-      color: #ffb6c1;
       font-size: 2em;
       font-weight: bold;
-      animation: caer 6s linear infinite;
-      text-shadow: 0 0 10px rgba(255,105,180,0.9);
+      animation: caer 4s linear;
+      pointer-events: none;
     }
+
     @keyframes caer {
       0% { top: -50px; opacity: 0; }
       10% { opacity: 1; }
@@ -108,106 +135,241 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      background: red;
+      --cor-color: var(--rojo);
+      background: var(--cor-color);
       transform: rotate(45deg);
       animation: flotar 10s linear infinite;
     }
+
     .corazon::before, .corazon::after {
       content: "";
       position: absolute;
-      width: 20px; height: 20px;
-      background: red;
+      width: 20px;
+      height: 20px;
+      background: var(--cor-color);
       border-radius: 50%;
     }
+
     .corazon::before { top: -10px; left: 0; }
-    .corazon::after { top: 0; left: -10px; }
+    .corazon::after  { top: 0; left: -10px; }
+
     @keyframes flotar {
       0% { transform: translateY(0) rotate(45deg); opacity: 1; }
       100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
     }
 
-    /* FOOTER */
-    footer {
-      background: rgba(0,0,0,0.7);
-      text-align: center;
-      padding: 1rem;
-      color: #fff;
-      margin-top: 2rem;
+    /* Navegación dentro del contenedor */
+    .nav-area{
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #siguienteBtn{
+      background: linear-gradient(90deg,var(--azul),var(--glauco));
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    .arrow{
+      font-size: 0.9em;
+      color: var(--blanco);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      animation: floatArrow 1.2s ease-in-out infinite;
+    }
+
+    .arrow .chev{
+      display:inline-block;
+      transform: rotate(90deg);
+      font-size: 1.6em;
+    }
+
+    @keyframes floatArrow{
+      0%{ transform: translateY(0); }
+      50%{ transform: translateY(6px); }
+      100%{ transform: translateY(0); }
+    }
+
+    /* Background carousel */
+    #bg-carousel{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      transition: background-image 1s ease, opacity 600ms ease;
+      pointer-events: none;
+      filter: saturate(0.95) blur(0.6px);
+    }
+
+    /* Responsive adjustments */
+    #frase{ max-width:560px; }
+
+    @media (max-width: 900px){
+      #contenedor{ padding:150px; }
+      #imagen{ width: 80%; }
+      .title-line.t1{ font-size:1.9em; }
+      .title-line.t2{ font-size:1.4em; }
+      .title-line.t3{ font-size:1.05em; }
+      #frase{ font-size:1.05em; }
+    }
+
+    @media (max-width: 600px){
+      body{ align-items:stretch; }
+      :root{ --margen-responsive: 12px; }
+      #contenedor{ padding:18px; border-radius:12px; min-height:60vh; }
+      #imagen{ width: 92%; max-width:520px; height:auto; }
+      .title-line.t1{ font-size:2.4em; }
+      .title-line.t2{ font-size:1.9em; }
+      .title-line.t3{ font-size:1.25em; }
+      #frase{ font-size:1.15em; margin:8px auto 0; -webkit-line-clamp:3; }
+      #siguienteBtn{ padding:12px 24px; font-size:1.05em; }
+    }
+
+    @media (max-width: 380px){
+      :root{ --margen-responsive: 10px; }
+      #contenedor{ padding:14px; border-radius:10px; min-height:65vh; }
+      .title-line.t1{ font-size:1.8em; }
+      .title-line.t2{ font-size:1.2em; }
+      .title-line.t3{ font-size:1.05em; }
+      #frase{ font-size:1.02em; -webkit-line-clamp:3; }
+      #siguienteBtn{ padding:12px 22px; font-size:1em; }
     }
   </style>
 </head>
-
 <body>
-  <!-- ANIMACIONES -->
+
+  <!-- Carrusel de fondo (detrás de todo) -->
+  <div id="bg-carousel" aria-hidden="true"></div>
+
+  <!-- Música -->
+  <audio id="musica" src="cancion2.mp3" autoplay muted loop></audio>
+
+  <!-- Texto encima del botón -->
+  <div class="texto-encima-boton">Haz clic aquí</div>
+
+  <!-- Botón -->
+  <button class="boton-circular" id="boton" onclick="mostrarContenido()">💖</button>
+
+  <!-- Contenido que aparece después -->
+  <div id="contenedor">
+    <div id="titulo">
+      <div class="title-line t1">PARA TI</div>
+      
+      <div class="title-line t3">ZOE  JULIA GUADALUPE</div>
+    </div>
+    <img id="imagen" src="imagen1.jpg" alt="Un ramo de flores para ti">
+    <div id="frase"></div>
+    
+    <div class="nav-area">
+      <div class="title-line t3">DE PARTE DE ANDERSON</div>
+      <button id="siguienteBtn" style="display:none">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Palabras y corazones -->
   <div id="contenedor-palabras"></div>
   <div id="contenedor-corazones"></div>
 
-  <!-- HEADER -->
-  <header>
-    <h1>Para Ti - Mi Ingridd 💖</h1>
-    <p>Gracias por llenarme de amor, TE AMOOOOOOO 🌸</p>
-  </header>
-
-  <!-- SECCIONES -->
-  <section class="container">
-    <h2>🌹 Lo que siento por ti</h2>
-    <div class="card-grid">
-      <div class="card">
-        <img src="2.jpeg" alt="Amor">
-        <h3>Mi Amor</h3>
-        <p>Desde que llegaste, mi vida tiene más inspiracion. Gracias por todo, se que el futuro nos tiene grandes cosas y quiero cumplirlas todas contigo mi bb hermosa.</p>
-      </div>
-      <div class="card">
-        <img src="4.jpeg" alt="Sonrisa">
-        <h3>Tu Sonrisa</h3>
-        <p>Tu sonrisa ilumina mis días y me recuerda lo afortunado que soy de tenerte.</p>
-      </div>
-      <div class="card">
-        <img src="1.jpeg" alt="Sueños">
-        <h3>Mi Ingridd</h3>
-        <p>Confio en ti mi amor, me enacantan esos ojitos hermosos que tienes
-            , tus rulitos me encantan, tu voz me derrite y tu cuerpo mi comida favorita bb
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="container">
-    <h2>💌 Palabras para ti</h2>
-    <p>
-      Ingridd, te amo demasiado, llegaste a mi vida sin que me lo esperar,
-      me llenas de amor y felicidad, te hagro recordar que siempre te amare, eres muy hermosa mi niña pequeña,
-      y tu siempre estaras en mi corazon, te amor con todo mi ser, besitos en tus cachetitos preciosa, MUACK <3
-    </p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>Con todo mi amor 💕 - Dieguito, el amor de tu vida </p>
-  </footer>
-
   <script>
-    // Lluvia de palabras
-    const palabras = ["Hermosa", "Preciosa", "Bella", "Ingridd", "Mi Amor", "Dulzura", "Encanto"];
-    setInterval(() => {
-      const palabra = document.createElement('div');
-      palabra.classList.add('palabra-lluvia');
-      palabra.style.left = Math.random() * 90 + "%";
-      palabra.innerText = palabras[Math.floor(Math.random() * palabras.length)];
-      document.getElementById("contenedor-palabras").appendChild(palabra);
-      setTimeout(() => palabra.remove(), 6000);
-    }, 1000);
+      // Carrusel de imágenes y frases (contenedor)
+      const containerImages = ['imagen1.jpg','imagen2.jpg','imagen3.jpg','imagen4.jpg'];
+      const phrases = [
+        'Hola, soy Diego Anderson y quiero decirte algooo..',
+        'Sabeeess me caiste super bien, se nota que eres una maravillosa personita',
+        'Asi que te prepare esto y un pequeño presenteeee..',
+        'Tomaaa, una flor para otra flor'
+      ];
+      let currentIndex = 0;
 
-    // Corazones flotando
-    setInterval(() => {
-      const corazon = document.createElement('div');
-      corazon.classList.add('corazon');
-      corazon.style.left = Math.random() * 100 + "vw";
-      corazon.style.bottom = "-30px";
-      corazon.style.animationDuration = (5 + Math.random() * 5) + "s";
-      document.getElementById("contenedor-corazones").appendChild(corazon);
-      setTimeout(() => corazon.remove(), 10000);
-    }, 400);
+      // Background images (behind the page)
+      const bgImages = ['zoe2.png','zoe1.jpeg'];
+
+      function updateSlide(){
+        const img = document.getElementById('imagen');
+        const frase = document.getElementById('frase');
+        img.src = containerImages[currentIndex];
+        frase.innerText = phrases[currentIndex];
+        const btn = document.getElementById('siguienteBtn');
+        if(currentIndex === containerImages.length - 1) btn.innerText = 'Regresar al inicio';
+        else btn.innerText = 'Siguiente';
+      }
+
+      function mostrarContenido() {
+        document.getElementById("boton").style.display = "none";
+        document.querySelector(".texto-encima-boton").style.display = "none";
+        document.getElementById("contenedor").style.display = "flex";
+        document.getElementById('siguienteBtn').style.display = 'inline-block';
+
+        const audio = document.getElementById("musica");
+        audio.muted = false;
+        audio.play().catch(()=>{});
+
+        currentIndex = 0;
+        updateSlide();
+      }
+
+      document.getElementById('siguienteBtn').addEventListener('click', ()=>{
+        if(currentIndex === containerImages.length - 1){
+          currentIndex = 0;
+        } else {
+          currentIndex++;
+        }
+        updateSlide();
+      });
+
+      // Palabras que caen con colores aleatorios
+      const palabras = ["hermosa", "*hace sonidos con su boquita", "Zoe", "Julia", "Guadalupe", "Lupe", "bella", "divina", "linda", "Sirenita", "jinx jajsak"];
+      const paletteWords = [getComputedStyle(document.documentElement).getPropertyValue('--rojo').trim()];
+      const paletteHearts = [getComputedStyle(document.documentElement).getPropertyValue('--rojo').trim(), getComputedStyle(document.documentElement).getPropertyValue('--azul').trim()];
+      setInterval(() => {
+        const palabra = document.createElement('div');
+        palabra.classList.add('palabra-lluvia');
+        palabra.style.left = Math.random() * 90 + "%";
+        palabra.style.color = paletteWords[0];
+        palabra.style.fontSize = (18 + Math.random()*18) + 'px';
+        palabra.innerText = palabras[Math.floor(Math.random() * palabras.length)];
+        document.getElementById("contenedor-palabras").appendChild(palabra);
+        setTimeout(() => palabra.remove(), 5000);
+      }, 700);
+
+      // Corazones flotando con colores variados
+      setInterval(() => {
+        const corazon = document.createElement('div');
+        corazon.classList.add('corazon');
+        const color = paletteHearts[Math.floor(Math.random() * paletteHearts.length)];
+        corazon.style.setProperty('--cor-color', color);
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.bottom = "-30px";
+        corazon.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.getElementById("contenedor-corazones").appendChild(corazon);
+        setTimeout(() => corazon.remove(), 10000);
+      }, 300);
+
+      // Background carousel uses same images as container but placed behind the page
+      (function setupBgCarousel(){
+        const bg = document.getElementById('bg-carousel');
+        if(!bg) return;
+        let bgIndex = 0;
+        function setBg(i){
+          bg.style.backgroundImage = `url(${bgImages[i]})`;
+        }
+        setBg(bgIndex);
+        setInterval(()=>{
+          bgIndex = (bgIndex + 1) % bgImages.length;
+          setBg(bgIndex);
+        }, 5000);
+      })();
   </script>
 </body>
 </html>
