@@ -11,6 +11,7 @@
     #bg-carousel { position: fixed; inset: 0; z-index: -2; background-size: cover; background-position: center; opacity: .22; filter: saturate(.95) blur(.6px); transition: background-image 1s ease; }
     #inicio, #contenedor, #mensaje-amistad, #invitacion { display: flex; flex-direction: column; align-items: center; }
     #inicio { width: 100%; min-height: 100svh; justify-content: center; gap: 14px; padding: var(--margen); text-align: center; }
+    #titulo-inicio { margin: 0; font-size: clamp(2.2rem, 10vw, 4.8rem); letter-spacing: .12em; text-shadow: 0 3px 18px rgba(5,42,100,.56); }
     .texto-encima-boton { font-size: clamp(1.1rem, 4vw, 1.35rem); }
     .boton-circular { width: clamp(100px, 24vw, 124px); height: clamp(100px, 24vw, 124px); border: 0; border-radius: 50%; color: white; font-size: clamp(2.1rem, 8vw, 3rem); cursor: pointer; background: linear-gradient(145deg, #398dea, #0756ba); box-shadow: 0 0 26px rgba(70,172,255,.7); animation: latido 1s infinite; }
     @keyframes latido { 50% { transform: scale(1.08); } }
@@ -32,6 +33,9 @@
     @keyframes subirGlobo { to { transform: translateY(-125vh) translateX(var(--deriva)); opacity: 0; } }
     .confeti { position: fixed; z-index: -1; top: -18px; width: 9px; height: 16px; border-radius: 3px; pointer-events: none; animation: caerConfeti 7s linear forwards; }
     @keyframes caerConfeti { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+    #flash { position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(220,248,255,.95), rgba(94,186,255,.5) 35%, transparent 72%); }
+    #flash.destello { animation: destello 1.1s ease-out both; }
+    @keyframes destello { 0% { opacity: 0; } 18% { opacity: 1; } 100% { opacity: 0; } }
     body.final { background: #0d5a9b; }
     body.final::before { content: ""; position: fixed; inset: -35vmax; z-index: -2; background: radial-gradient(circle at 25% 30%, #8bd5e3 0 9%, transparent 25%), radial-gradient(circle at 78% 65%, #0869cb 0 11%, transparent 31%), radial-gradient(circle at 48% 48%, #2aa89e 0 14%, #11458d 45%, #102c67 70%); background-size: 65% 65%, 70% 70%, 100% 100%; animation: oleaje 22s ease-in-out infinite alternate; }
     @keyframes oleaje { to { transform: rotate(16deg) scale(1.14) translate(4%, -3%); filter: hue-rotate(15deg); } }
@@ -47,11 +51,12 @@
 <body>
   <div id="bg-carousel" aria-hidden="true"></div>
   <audio id="musica" src="audiooficial.mp3" autoplay muted loop></audio>
-  <section id="inicio"><div class="texto-encima-boton">Dale click para abrir</div><button class="boton-circular" id="boton" type="button" aria-label="Abrir mensaje para Zoe">💌</button></section>
+  <div id="flash" aria-hidden="true"></div>
+  <section id="inicio"><h1 id="titulo-inicio">PARA TI</h1><div class="texto-encima-boton">Dale click para abrir</div><button class="boton-circular" id="boton" type="button" aria-label="Abrir mensaje para Zoe">💌</button></section>
   <main id="contenedor" class="oculto"><h1 id="titulo">PARA TI, ZOE</h1><img id="imagen" src="imagen1.jpg" alt="Un recuerdo bonito para Zoe"><div id="frase" aria-live="polite"></div><button id="siguienteBtn" type="button">Siguiente</button></main>
   <section id="mensaje-amistad" class="oculto" aria-live="polite">Solo trato de animarte porque eso es lo que los amigos hacen. Entenderé si quizá prefieres aún estar sola. 💙</section>
   <section id="invitacion" class="oculto"><h1>¿Miramos una película clásica de anime?</h1><p>Sé que te encantará ✨</p><div>Aplasta el botón:</div><div class="opciones"><button class="decision-btn" id="siBtn" type="button">Sí 💙</button><button class="decision-btn" id="noBtn" type="button">No</button></div><div id="nota-no" aria-live="polite"></div></section>
-  <div id="contenedor-palabras" aria-hidden="true"></div><div id="contenedor-globos" aria-hidden="true"></div><div id="contenedor-confeti" aria-hidden="true"></div>
+  <div id="contenedor-palabras" aria-hidden="true"></div><div id="contenedor-corazones" aria-hidden="true"></div><div id="contenedor-globos" aria-hidden="true"></div><div id="contenedor-confeti" aria-hidden="true"></div>
   <script>
     const frases = [
       'Helllooooouuuu',
@@ -68,14 +73,18 @@
     const $ = (id) => document.getElementById(id);
     function actualizarDiapositiva() { $('imagen').src = imagenes[indice % imagenes.length]; $('frase').textContent = frases[indice]; $('siguienteBtn').textContent = indice === frases.length - 1 ? 'Siguiente ✨' : 'Siguiente'; }
     function abrirChat(texto) { window.open(`https://wa.me/51948996922?text=${encodeURIComponent(texto)}`, '_blank', 'noopener'); }
-    function mostrarFinal() { efectosActivos = false; $('contenedor-palabras').replaceChildren(); $('contenedor-globos').replaceChildren(); $('contenedor-confeti').replaceChildren(); document.body.classList.add('final'); $('bg-carousel').classList.add('oculto'); $('invitacion').classList.remove('oculto'); $('mensaje-amistad').classList.remove('oculto'); setTimeout(() => $('mensaje-amistad').classList.add('oculto'), 3000); }
-    $('boton').addEventListener('click', () => { $('inicio').classList.add('oculto'); $('contenedor').classList.remove('oculto'); efectosActivos = true; const musica = $('musica'); musica.muted = false; musica.play().catch(() => {}); indice = 0; actualizarDiapositiva(); });
+    function mostrarFinal() { efectosActivos = false; $('contenedor-palabras').replaceChildren(); $('contenedor-corazones').replaceChildren(); $('contenedor-globos').replaceChildren(); $('contenedor-confeti').replaceChildren(); document.body.classList.add('final'); $('bg-carousel').classList.add('oculto'); $('invitacion').classList.remove('oculto'); $('mensaje-amistad').classList.remove('oculto'); setTimeout(() => $('mensaje-amistad').classList.add('oculto'), 5000); }
+    function dispararTransicion() {
+      $('flash').classList.remove('destello'); void $('flash').offsetWidth; $('flash').classList.add('destello');
+      for (let i = 0; i < 9; i++) { const globo = document.createElement('div'); globo.className = 'globo'; globo.style.left = `${Math.random() * 96}vw`; globo.style.setProperty('--deriva', `${-90 + Math.random() * 180}px`); globo.style.animationDuration = `${3.4 + Math.random() * 2}s`; $('contenedor-globos').append(globo); setTimeout(() => globo.remove(), 6000); }
+      for (let i = 0; i < 38; i++) { const confeti = document.createElement('div'); confeti.className = 'confeti'; confeti.style.left = `${Math.random() * 100}vw`; confeti.style.background = ['#8bd5e3', '#5baef5', '#2aa89e', '#d8f4ff'][Math.floor(Math.random() * 4)]; confeti.style.animationDuration = `${2.2 + Math.random() * 2}s`; confeti.style.animationDelay = `${Math.random() * .55}s`; $('contenedor-confeti').append(confeti); setTimeout(() => confeti.remove(), 5000); }
+    }
+    $('boton').addEventListener('click', () => { $('inicio').classList.add('oculto'); dispararTransicion(); const musica = $('musica'); musica.muted = false; musica.play().catch(() => {}); indice = 0; setTimeout(() => { $('contenedor').classList.remove('oculto'); efectosActivos = true; actualizarDiapositiva(); }, 850); });
     $('siguienteBtn').addEventListener('click', () => { if (indice < frases.length - 1) { indice++; actualizarDiapositiva(); return; } $('contenedor').classList.add('oculto'); mostrarFinal(); });
     $('siBtn').addEventListener('click', () => abrirChat('oyee sonsitoo,siii, hay que ver una pelicula ugu'));
     $('noBtn').addEventListener('click', () => { intentosNo++; if (intentosNo >= 5) { abrirChat('perdon, Anderson, en estos momentos deseo no hablar'); return; } const area = document.querySelector('.opciones'), boton = $('noBtn'); const maxX = Math.max(0, area.clientWidth - boton.offsetWidth), maxY = Math.max(35, area.clientHeight - boton.offsetHeight); boton.style.position = 'absolute'; boton.style.left = `${Math.random() * maxX}px`; boton.style.top = `${Math.random() * maxY}px`; $('nota-no').textContent = `Uy, ese botón se escapó (${intentosNo}/5) 😅`; });
     setInterval(() => { if (!efectosActivos) return; const palabra = document.createElement('div'); palabra.className = 'palabra-lluvia'; palabra.style.left = `${Math.random() * 90}%`; palabra.style.color = Math.random() > .5 ? '#ff3b30' : '#60bfff'; palabra.style.fontSize = `${18 + Math.random() * 18}px`; palabra.textContent = palabras[Math.floor(Math.random() * palabras.length)]; $('contenedor-palabras').append(palabra); setTimeout(() => palabra.remove(), 4500); }, 650);
-    setInterval(() => { if (!efectosActivos) return; const globo = document.createElement('div'); globo.className = 'globo'; globo.style.left = `${Math.random() * 96}vw`; globo.style.setProperty('--deriva', `${-60 + Math.random() * 120}px`); globo.style.animationDuration = `${10 + Math.random() * 7}s`; $('contenedor-globos').append(globo); setTimeout(() => globo.remove(), 18000); }, 1000);
-    setInterval(() => { if (!efectosActivos) return; const confeti = document.createElement('div'); confeti.className = 'confeti'; confeti.style.left = `${Math.random() * 100}vw`; confeti.style.background = ['#8bd5e3', '#5baef5', '#2aa89e', '#d8f4ff'][Math.floor(Math.random() * 4)]; confeti.style.animationDuration = `${5 + Math.random() * 4}s`; $('contenedor-confeti').append(confeti); setTimeout(() => confeti.remove(), 9500); }, 310);
+    setInterval(() => { if (!efectosActivos) return; const corazon = document.createElement('div'); corazon.className = 'corazon'; corazon.style.setProperty('--cor-color', Math.random() > .5 ? '#ff3b30' : '#065bc8'); corazon.style.left = `${Math.random() * 100}vw`; corazon.style.animationDuration = `${5 + Math.random() * 5}s`; $('contenedor-corazones').append(corazon); setTimeout(() => corazon.remove(), 10000); }, 350);
     (() => { const bg = $('bg-carousel'), fondos = ['zoe2.png', 'zoe1.jpeg']; let i = 0; const cambiar = () => { bg.style.backgroundImage = `url(${fondos[i]})`; i = (i + 1) % fondos.length; }; cambiar(); setInterval(cambiar, 5000); })();
   </script>
 </body>
