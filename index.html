@@ -68,7 +68,7 @@
       'Quieroo animarteeeeeeeeee.',
       'Me dijiste que te gusta el animeeeee, entonces ¿qué te parece si más tarde vemos una película clásicaaa de animeee? Sé que te gustaráaa ;)'
     ];
-    const imagenes = ['zoe1.jpg', 'zoe2.jpg', 'zoe3.jpg', 'zoe4.jpg', 'zoe5.jpg', 'zoe6.jpg', 'zoe6.jpg'];
+    const imagenes = ['zoe1.jpg?v=2', 'zoe2.jpg?v=2', 'zoe3.jpg?v=2', 'zoe4.jpg?v=2', 'zoe5.jpg?v=2', 'zoe6.jpg?v=2', 'zoe6.jpg?v=2'];
     const palabras = ['hermosa', 'Zoe', 'Julia', 'Guadalupe', 'Lupe', 'bella', 'divina', 'linda', 'Sirenita', 'sonsita', 'blue', 'blucita', 'azulita', 'azuul'];
     let indice = 0, intentosNo = 0, efectosActivos = false;
     const $ = (id) => document.getElementById(id);
@@ -86,7 +86,7 @@
     $('noBtn').addEventListener('click', () => { intentosNo++; if (intentosNo >= 5) { abrirChat('perdon, Anderson, en estos momentos deseo no hablar'); return; } const area = document.querySelector('.opciones'), boton = $('noBtn'); const maxX = Math.max(0, area.clientWidth - boton.offsetWidth), maxY = Math.max(35, area.clientHeight - boton.offsetHeight); boton.style.position = 'absolute'; boton.style.left = `${Math.random() * maxX}px`; boton.style.top = `${Math.random() * maxY}px`; $('nota-no').textContent = `Uy, ese botón se escapó (${intentosNo}/5) 😅`; });
     setInterval(() => { if (!efectosActivos) return; const palabra = document.createElement('div'); palabra.className = 'palabra-lluvia'; palabra.style.left = `${Math.random() * 90}%`; palabra.style.color = Math.random() > .5 ? '#ff3b30' : '#60bfff'; palabra.style.fontSize = `${18 + Math.random() * 18}px`; palabra.textContent = palabras[Math.floor(Math.random() * palabras.length)]; $('contenedor-palabras').append(palabra); setTimeout(() => palabra.remove(), 4500); }, 650);
     setInterval(() => { if (!efectosActivos) return; const corazon = document.createElement('div'); corazon.className = 'corazon'; corazon.style.setProperty('--cor-color', Math.random() > .5 ? '#ff3b30' : '#065bc8'); corazon.style.left = `${Math.random() * 100}vw`; corazon.style.animationDuration = `${5 + Math.random() * 5}s`; $('contenedor-corazones').append(corazon); setTimeout(() => corazon.remove(), 10000); }, 350);
-    (() => { const bg = $('bg-carousel'), fondos = ['zoe2.png', 'zoe1.jpeg']; let i = 0; const cambiar = () => { bg.style.backgroundImage = `url(${fondos[i]})`; i = (i + 1) % fondos.length; }; cambiar(); setInterval(cambiar, 5000); })();
+    (() => { const bg = $('bg-carousel'), fondos = ['zoe1.jpg?v=2', 'zoe2.jpg?v=2', 'zoe3.jpg?v=2', 'zoe4.jpg?v=2', 'zoe5.jpg?v=2', 'zoe6.jpg?v=2']; let i = 0; const cambiar = () => { bg.style.backgroundImage = `url(${fondos[i]})`; i = (i + 1) % fondos.length; }; cambiar(); setInterval(cambiar, 5000); })();
   </script>
 </body>
 </html>
