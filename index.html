@@ -10,22 +10,28 @@
     body { min-height: 100vh; margin: 0; overflow-x: hidden; color: var(--blanco); font-family: "Segoe UI", sans-serif; display: grid; place-items: center; background: linear-gradient(to top, rgba(5,90,200,.85), rgba(4,41,58,.15)); }
     #bg-carousel { position: fixed; inset: 0; z-index: -2; background-size: cover; background-position: center; opacity: .22; filter: saturate(.95) blur(.6px); transition: background-image 1s ease; }
     #inicio, #contenedor, #mensaje-amistad, #invitacion { display: flex; flex-direction: column; align-items: center; }
-    #inicio { gap: 10px; } .texto-encima-boton { font-size: 1.1rem; }
-    .boton-circular { width: 100px; height: 100px; border: 0; border-radius: 50%; color: white; font-size: 1.8rem; cursor: pointer; background: #ff3b30; box-shadow: 0 0 20px rgba(255,0,0,.7); animation: latido 1s infinite; }
+    #inicio { width: 100%; min-height: 100svh; justify-content: center; gap: 14px; padding: var(--margen); text-align: center; }
+    .texto-encima-boton { font-size: clamp(1.1rem, 4vw, 1.35rem); }
+    .boton-circular { width: clamp(100px, 24vw, 124px); height: clamp(100px, 24vw, 124px); border: 0; border-radius: 50%; color: white; font-size: clamp(2.1rem, 8vw, 3rem); cursor: pointer; background: linear-gradient(145deg, #398dea, #0756ba); box-shadow: 0 0 26px rgba(70,172,255,.7); animation: latido 1s infinite; }
     @keyframes latido { 50% { transform: scale(1.08); } }
-    #contenedor, #mensaje-amistad { width: min(720px, calc(100% - var(--margen) * 2)); padding: 24px; margin: var(--margen); border: 3px solid white; border-radius: 20px; color: #132131; background: rgba(255,255,255,.93); text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.22); animation: aparecer .6s ease both; }
-    @keyframes aparecer { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    #contenedor { width: min(720px, calc(100% - var(--margen) * 2)); padding: 24px; margin: var(--margen); border: 3px solid white; border-radius: 20px; color: #132131; background: rgba(255,255,255,.93); text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.22); animation: aparecer 1.45s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes aparecer { from { transform: scale(.72); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     #titulo { margin: 0 0 12px; color: #c2185b; font-weight: 700; font-size: clamp(1.45rem, 5vw, 2.2rem); }
     #imagen { width: min(350px, 90%); max-height: 330px; object-fit: cover; border-radius: 18px; box-shadow: 0 0 15px rgba(0,0,0,.25); }
     #frase { min-height: 5em; margin: 18px 0 8px; display: grid; place-items: center; font-size: clamp(1.1rem, 3.7vw, 1.35rem); font-weight: 600; line-height: 1.42; }
     #siguienteBtn, .decision-btn { border: 0; border-radius: 12px; padding: 12px 25px; cursor: pointer; color: white; font-size: 1rem; font-weight: 700; background: linear-gradient(100deg, var(--azul), var(--glauco)); box-shadow: 0 6px 18px rgba(0,0,0,.28); }
-    #mensaje-amistad { font-size: clamp(1.25rem, 4vw, 1.75rem); font-weight: 650; line-height: 1.45; }
+    #mensaje-amistad { position: fixed; z-index: 5; inset: auto var(--margen); width: min(610px, calc(100% - var(--margen) * 2)); margin: auto; padding: clamp(20px, 5vw, 34px); border: 1px solid rgba(255,255,255,.58); border-radius: 24px; color: white; background: rgba(11, 64, 123, .36); box-shadow: 0 12px 38px rgba(0,0,0,.24); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); text-align: center; font-size: clamp(1.2rem, 4vw, 1.7rem); font-weight: 650; line-height: 1.45; animation: aparecer .55s ease both; }
     .palabra-lluvia { position: fixed; top: -50px; z-index: -1; font-weight: bold; pointer-events: none; animation: caer 4s linear; }
     @keyframes caer { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(105vh); opacity: 0; } }
     .corazon { position: fixed; bottom: -30px; width: 20px; height: 20px; background: var(--cor-color, #ff3b30); transform: rotate(45deg); animation: flotar 8s linear forwards; pointer-events: none; }
     .corazon::before, .corazon::after { content: ""; position: absolute; width: 20px; height: 20px; border-radius: 50%; background: inherit; }
     .corazon::before { top: -10px; } .corazon::after { left: -10px; }
     @keyframes flotar { to { transform: translateY(-110vh) rotate(45deg); opacity: 0; } }
+    .globo { position: fixed; z-index: -1; bottom: -110px; width: clamp(38px, 8vw, 66px); height: clamp(50px, 10vw, 84px); border-radius: 50% 50% 47% 47%; background: radial-gradient(circle at 32% 27%, rgba(255,255,255,.78) 0 5%, transparent 7%), linear-gradient(135deg, #8bdaff, #0874d4); box-shadow: inset -9px -12px 18px rgba(0,55,135,.25), 0 7px 14px rgba(0,44,125,.16); pointer-events: none; animation: subirGlobo 13s linear forwards; }
+    .globo::after { content: ""; position: absolute; left: 48%; top: 98%; width: 1px; height: 70px; background: rgba(206,241,255,.72); }
+    @keyframes subirGlobo { to { transform: translateY(-125vh) translateX(var(--deriva)); opacity: 0; } }
+    .confeti { position: fixed; z-index: -1; top: -18px; width: 9px; height: 16px; border-radius: 3px; pointer-events: none; animation: caerConfeti 7s linear forwards; }
+    @keyframes caerConfeti { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
     body.final { background: #0d5a9b; }
     body.final::before { content: ""; position: fixed; inset: -35vmax; z-index: -2; background: radial-gradient(circle at 25% 30%, #8bd5e3 0 9%, transparent 25%), radial-gradient(circle at 78% 65%, #0869cb 0 11%, transparent 31%), radial-gradient(circle at 48% 48%, #2aa89e 0 14%, #11458d 45%, #102c67 70%); background-size: 65% 65%, 70% 70%, 100% 100%; animation: oleaje 22s ease-in-out infinite alternate; }
     @keyframes oleaje { to { transform: rotate(16deg) scale(1.14) translate(4%, -3%); filter: hue-rotate(15deg); } }
@@ -41,11 +47,11 @@
 <body>
   <div id="bg-carousel" aria-hidden="true"></div>
   <audio id="musica" src="audiooficial.mp3" autoplay muted loop></audio>
-  <section id="inicio"><div class="texto-encima-boton">Haz clic aquí</div><button class="boton-circular" id="boton" type="button" aria-label="Abrir mensaje para Zoe">💖</button></section>
+  <section id="inicio"><div class="texto-encima-boton">Dale click para abrir</div><button class="boton-circular" id="boton" type="button" aria-label="Abrir mensaje para Zoe">💌</button></section>
   <main id="contenedor" class="oculto"><h1 id="titulo">PARA TI, ZOE</h1><img id="imagen" src="imagen1.jpg" alt="Un recuerdo bonito para Zoe"><div id="frase" aria-live="polite"></div><button id="siguienteBtn" type="button">Siguiente</button></main>
   <section id="mensaje-amistad" class="oculto" aria-live="polite">Solo trato de animarte porque eso es lo que los amigos hacen. Entenderé si quizá prefieres aún estar sola. 💙</section>
   <section id="invitacion" class="oculto"><h1>¿Miramos una película clásica de anime?</h1><p>Sé que te encantará ✨</p><div>Aplasta el botón:</div><div class="opciones"><button class="decision-btn" id="siBtn" type="button">Sí 💙</button><button class="decision-btn" id="noBtn" type="button">No</button></div><div id="nota-no" aria-live="polite"></div></section>
-  <div id="contenedor-palabras" aria-hidden="true"></div><div id="contenedor-corazones" aria-hidden="true"></div>
+  <div id="contenedor-palabras" aria-hidden="true"></div><div id="contenedor-globos" aria-hidden="true"></div><div id="contenedor-confeti" aria-hidden="true"></div>
   <script>
     const frases = [
       'Helllooooouuuu',
@@ -58,17 +64,18 @@
     ];
     const imagenes = ['imagen1.jpg', 'imagen2.jpg', 'imagen3.jpg', 'imagen4.jpg'];
     const palabras = ['hermosa', 'Zoe', 'Julia', 'Guadalupe', 'Lupe', 'bella', 'divina', 'linda', 'Sirenita', 'sonsita', 'blue', 'blucita', 'azulita', 'azuul'];
-    let indice = 0, intentosNo = 0, efectosActivos = true;
+    let indice = 0, intentosNo = 0, efectosActivos = false;
     const $ = (id) => document.getElementById(id);
     function actualizarDiapositiva() { $('imagen').src = imagenes[indice % imagenes.length]; $('frase').textContent = frases[indice]; $('siguienteBtn').textContent = indice === frases.length - 1 ? 'Siguiente ✨' : 'Siguiente'; }
     function abrirChat(texto) { window.open(`https://wa.me/51948996922?text=${encodeURIComponent(texto)}`, '_blank', 'noopener'); }
-    function mostrarFinal() { $('mensaje-amistad').classList.add('oculto'); $('contenedor-palabras').replaceChildren(); $('contenedor-corazones').replaceChildren(); efectosActivos = false; document.body.classList.add('final'); $('bg-carousel').classList.add('oculto'); $('invitacion').classList.remove('oculto'); }
-    $('boton').addEventListener('click', () => { $('inicio').classList.add('oculto'); $('contenedor').classList.remove('oculto'); const musica = $('musica'); musica.muted = false; musica.play().catch(() => {}); indice = 0; actualizarDiapositiva(); });
-    $('siguienteBtn').addEventListener('click', () => { if (indice < frases.length - 1) { indice++; actualizarDiapositiva(); return; } $('contenedor').classList.add('oculto'); $('mensaje-amistad').classList.remove('oculto'); setTimeout(mostrarFinal, 4300); });
+    function mostrarFinal() { efectosActivos = false; $('contenedor-palabras').replaceChildren(); $('contenedor-globos').replaceChildren(); $('contenedor-confeti').replaceChildren(); document.body.classList.add('final'); $('bg-carousel').classList.add('oculto'); $('invitacion').classList.remove('oculto'); $('mensaje-amistad').classList.remove('oculto'); setTimeout(() => $('mensaje-amistad').classList.add('oculto'), 3000); }
+    $('boton').addEventListener('click', () => { $('inicio').classList.add('oculto'); $('contenedor').classList.remove('oculto'); efectosActivos = true; const musica = $('musica'); musica.muted = false; musica.play().catch(() => {}); indice = 0; actualizarDiapositiva(); });
+    $('siguienteBtn').addEventListener('click', () => { if (indice < frases.length - 1) { indice++; actualizarDiapositiva(); return; } $('contenedor').classList.add('oculto'); mostrarFinal(); });
     $('siBtn').addEventListener('click', () => abrirChat('oyee sonsitoo,siii, hay que ver una pelicula ugu'));
     $('noBtn').addEventListener('click', () => { intentosNo++; if (intentosNo >= 5) { abrirChat('perdon, Anderson, en estos momentos deseo no hablar'); return; } const area = document.querySelector('.opciones'), boton = $('noBtn'); const maxX = Math.max(0, area.clientWidth - boton.offsetWidth), maxY = Math.max(35, area.clientHeight - boton.offsetHeight); boton.style.position = 'absolute'; boton.style.left = `${Math.random() * maxX}px`; boton.style.top = `${Math.random() * maxY}px`; $('nota-no').textContent = `Uy, ese botón se escapó (${intentosNo}/5) 😅`; });
     setInterval(() => { if (!efectosActivos) return; const palabra = document.createElement('div'); palabra.className = 'palabra-lluvia'; palabra.style.left = `${Math.random() * 90}%`; palabra.style.color = Math.random() > .5 ? '#ff3b30' : '#60bfff'; palabra.style.fontSize = `${18 + Math.random() * 18}px`; palabra.textContent = palabras[Math.floor(Math.random() * palabras.length)]; $('contenedor-palabras').append(palabra); setTimeout(() => palabra.remove(), 4500); }, 650);
-    setInterval(() => { if (!efectosActivos) return; const corazon = document.createElement('div'); corazon.className = 'corazon'; corazon.style.setProperty('--cor-color', Math.random() > .5 ? '#ff3b30' : '#065bc8'); corazon.style.left = `${Math.random() * 100}vw`; corazon.style.animationDuration = `${5 + Math.random() * 5}s`; $('contenedor-corazones').append(corazon); setTimeout(() => corazon.remove(), 10000); }, 350);
+    setInterval(() => { if (!efectosActivos) return; const globo = document.createElement('div'); globo.className = 'globo'; globo.style.left = `${Math.random() * 96}vw`; globo.style.setProperty('--deriva', `${-60 + Math.random() * 120}px`); globo.style.animationDuration = `${10 + Math.random() * 7}s`; $('contenedor-globos').append(globo); setTimeout(() => globo.remove(), 18000); }, 1000);
+    setInterval(() => { if (!efectosActivos) return; const confeti = document.createElement('div'); confeti.className = 'confeti'; confeti.style.left = `${Math.random() * 100}vw`; confeti.style.background = ['#8bd5e3', '#5baef5', '#2aa89e', '#d8f4ff'][Math.floor(Math.random() * 4)]; confeti.style.animationDuration = `${5 + Math.random() * 4}s`; $('contenedor-confeti').append(confeti); setTimeout(() => confeti.remove(), 9500); }, 310);
     (() => { const bg = $('bg-carousel'), fondos = ['zoe2.png', 'zoe1.jpeg']; let i = 0; const cambiar = () => { bg.style.backgroundImage = `url(${fondos[i]})`; i = (i + 1) % fondos.length; }; cambiar(); setInterval(cambiar, 5000); })();
   </script>
 </body>
